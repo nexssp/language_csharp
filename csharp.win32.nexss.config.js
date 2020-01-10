@@ -1,15 +1,14 @@
 let languageConfig = Object.assign({}, require("../config.win32"));
 languageConfig.title = "CSharp";
 languageConfig.description =
-  "PHP is a popular general-purpose scripting language that is especially suited to web development. Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world.";
+  "C# (C-Sharp) is a programming language developed by Microsoft that runs on the .NET Framework.";
 languageConfig.url = "https://docs.microsoft.com/pl-pl/dotnet/csharp/";
 languageConfig.extensions = [".cs"];
 languageConfig.builders = {};
 languageConfig.compilers = {
-  csc: {
-    install: "scoop install shadowsocksr-csharp",
-    // Cpp does not have possibility to compile and run on the fly. We need to save it as a exe file first.
-    command: "csc", // FIXME: compiler doenst work https://web.archive.org/web/20090426124057/http://www.tipsntracks.com/52/get-a-free-csharp-command-line-compiler.html
+  dotnet: {
+    install: `scoop install dotnet-sdk dotnet-script`,
+    command: `dotnet-script`,
     args: "<file>",
     help: ``
   }
@@ -17,7 +16,7 @@ languageConfig.compilers = {
 languageConfig.errors = require("./nexss.csharp.errors");
 languageConfig.languagePackageManagers = {
   vcpkg: {
-    installation: "PowerShell.exe -File installVCPKG.bat",
+    installation: `PowerShell.exe -File ${__dirname}/installVCPKG.bat`,
     messageAfterInstallation: "", //this message will be displayed after this package manager installation, maybe some action needed etc.
     installed: "vcpkg list",
     search: "vcpkg search",
@@ -31,7 +30,7 @@ languageConfig.languagePackageManagers = {
     },
     // if command not found in specification
     // run directly on package manager
-    else: "vcpkg <default> <args>"
+    else: "vcpkg"
   }
 };
 
