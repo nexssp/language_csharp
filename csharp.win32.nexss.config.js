@@ -16,21 +16,14 @@ languageConfig.compilers = {
 languageConfig.errors = require("./nexss.csharp.errors");
 languageConfig.languagePackageManagers = {
   vcpkg: {
-    installation: `PowerShell.exe -File ${__dirname}/installVCPKG.bat`,
-    messageAfterInstallation: "", //this message will be displayed after this package manager installation, maybe some action needed etc.
-    installed: "vcpkg list",
-    search: "vcpkg search",
-    install: "vcpkg install",
-    uninstall: "vcpkg remove",
-    help: "vcpkg --help",
-    version: "vcpkg version",
-    init: () => {
-      require("child_process").execSync("vcpkg integrate project");
-      console.log("initialized vcpkg project.");
-    },
-    // if command not found in specification
-    // run directly on package manager
-    else: "vcpkg"
+    installation: `scoop install nuget`,
+    messageAfterInstallation: "",
+    install: "nuget install",
+    uninstall: "nuget remove",
+    help: "nuget --help",
+    version: "nuget version",
+    init: () => {},
+    else: "nuget"
   }
 };
 
