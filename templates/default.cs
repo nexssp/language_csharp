@@ -1,9 +1,10 @@
 #r "nuget:Newtonsoft.Json,12.0.3"
 
 using Newtonsoft.Json;
+Console.OutputEncoding = System.Text.Encoding.UTF8;
 string line;
 while ((line = Console.ReadLine()) != null && line != "") {
     dynamic obj = JsonConvert.DeserializeObject(line);
-    obj.test = "test";
+obj.test = "test";
     Console.WriteLine(obj.ToString(Newtonsoft.Json.Formatting.None));
 }
