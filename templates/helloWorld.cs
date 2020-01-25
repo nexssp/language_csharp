@@ -1,6 +1,7 @@
 #r "nuget:Newtonsoft.Json,12.0.3"
 
 using Newtonsoft.Json;
+Console.InputEncoding = System.Text.Encoding.UTF8;
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 string line;
 while ((line = Console.ReadLine()) != null && line != "") {
