@@ -2,6 +2,9 @@ let languageConfig = Object.assign({}, require("../config.win32"));
 languageConfig.title = "CSharp";
 languageConfig.description =
   "C# (C-Sharp) is a programming language developed by Microsoft that runs on the .NET Framework.";
+languageConfig.founders = ["Anders Hejlsberg"];
+languageConfig.developers = [""];
+languageConfig.years = ["2000"];
 languageConfig.url = "https://docs.microsoft.com/pl-pl/dotnet/csharp/";
 languageConfig.extensions = [".cs"];
 languageConfig.builders = {};
