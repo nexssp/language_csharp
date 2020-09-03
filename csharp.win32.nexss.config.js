@@ -1,4 +1,7 @@
-let languageConfig = Object.assign({}, require("../config.win32"));
+let languageConfig = Object.assign(
+  {},
+  require(`../config.${process.platform}`)
+);
 languageConfig.title = "CSharp";
 languageConfig.description =
   "C# (C-Sharp) is a programming language developed by Microsoft that runs on the .NET Framework.";
@@ -10,24 +13,24 @@ languageConfig.extensions = [".cs"];
 languageConfig.builders = {};
 languageConfig.compilers = {
   dotnet: {
-    install: `scoop install dotnet-sdk dotnet-script`,
+    install: `apt install -y dotnet-sdk dotnet-script`,
     command: `dotnet-script`,
     args: "<file>",
-    help: ``
-  }
+    help: ``,
+  },
 };
 languageConfig.errors = require("./nexss.csharp.errors");
 languageConfig.languagePackageManagers = {
   vcpkg: {
-    installation: `scoop install nuget`,
+    installation: `apt install -y nuget`,
     messageAfterInstallation: "",
     install: "nuget install",
     uninstall: "nuget remove",
     help: "nuget --help",
     version: "nuget version",
     init: () => {},
-    else: "nuget"
-  }
+    else: "nuget",
+  },
 };
 
 module.exports = languageConfig;
