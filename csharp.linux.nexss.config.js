@@ -2,7 +2,7 @@ let languageConfig = Object.assign({}, require("./csharp.win32.nexss.config"));
 
 languageConfig.compilers = {
   dotnet: {
-    install: `snap install dotnet-sdk && curl -s https://raw.githubusercontent.com/filipw/dotnet-script/master/install/install.sh | bash`,
+    install: `snap install --classic dotnet-sdk && curl -s https://raw.githubusercontent.com/filipw/dotnet-script/master/install/install.sh | bash`,
     command: `dotnet-script`,
     args: "<file>",
     help: ``,
