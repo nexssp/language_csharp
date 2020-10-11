@@ -71,6 +71,7 @@ ${sudo}curl -s https://raw.githubusercontent.com/filipw/dotnet-script/master/ins
 
     languageConfig.compilers.dotnet21.install = `${sudo}wget -q https://packages.microsoft.com/config/ubuntu/${version}/packages-microsoft-prod.deb
 ${sudo}dpkg -i packages-microsoft-prod.deb
+${sudo}apt-get install -y software-properties-common
 ${sudo}add-apt-repository universe
 ${sudo}apt-get install -y apt-transport-https curl
 ${sudo}apt-get update
