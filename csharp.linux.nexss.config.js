@@ -1,7 +1,6 @@
 let languageConfig = Object.assign({}, require("./csharp.win32.nexss.config"));
 
-const os = require(`${process.env.NEXSS_SRC_PATH}/node_modules/@nexssp/os/`);
-let sudo = os.sudo();
+let sudo = process.sudo;
 
 languageConfig.compilers = {
   dotnet21: {
@@ -12,7 +11,7 @@ languageConfig.compilers = {
   },
 };
 
-switch (os.name()) {
+switch (process.distro) {
   case os.distros.DEBIAN:
     const upd = `${sudo}dpkg -i packages-microsoft-prod.deb
 ${sudo}apt update -y
@@ -43,8 +42,9 @@ curl -s https://raw.githubusercontent.com/filipw/dotnet-script/master/install/in
     languageConfig.compilers.dotnet21.install = `${sudo}pacman -S --noconfirm dotnet-sdk dotnet-runtime
 curl -s https://raw.githubusercontent.com/filipw/dotnet-script/master/install/install.sh | bash`;
     break;
+  case os.distros.AMAZON_AMI:
   case os.distros.AMAZON:
-    languageConfig.compilers.dotnet21.install = os.replacePMByDistro(
+    languageConfig.compilers.dotnet21.install = process.replacePMByDistro(
       `${sudo}rpm --force -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
   yum install -y unzip dotnet-sdk-2.1 aspnetcore-runtime-2.1`
     );
@@ -67,7 +67,7 @@ ${sudo}curl -s https://raw.githubusercontent.com/filipw/dotnet-script/master/ins
 
     break;
   case os.distros.UBUNTU:
-    const version = os.v(); //20.04, 18.04
+    const version = process.distroVersion; //20.04, 18.04
 
     languageConfig.compilers.dotnet21.install = `${sudo}wget -q https://packages.microsoft.com/config/ubuntu/${version}/packages-microsoft-prod.deb
 ${sudo}dpkg -i packages-microsoft-prod.deb
