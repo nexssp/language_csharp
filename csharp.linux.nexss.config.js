@@ -12,12 +12,12 @@ languageConfig.compilers = {
 };
 
 switch (process.distro) {
-  case os.distros.DEBIAN:
+  case process.distros.DEBIAN:
     const upd = `${sudo}dpkg -i packages-microsoft-prod.deb
 ${sudo}apt update -y
 ${sudo}apt-get install -y apt-transport-https
 ${sudo}apt-get update -y`;
-    if (os.v() >= 10) {
+    if (process.distroVersion * 1 >= 10) {
       languageConfig.compilers.dotnet21.install = `wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 ${upd}
 ${sudo}apt-get install -y dotnet-sdk-2.1`;
@@ -34,16 +34,16 @@ ${sudo}apt-get install -y dotnet-sdk-2.1 dotnet-runtime-2.1`;
     }
 
     break;
-  case os.distros.ORACLE:
+  case process.distros.ORACLE:
     languageConfig.compilers.dotnet21.install = `${sudo}yum install -y oracle-epel-release-el7 dotnet-sdk-2.1 dotnet-runtime-2.1
 curl -s https://raw.githubusercontent.com/filipw/dotnet-script/master/install/install.sh | bash`;
     break;
-  case os.distros.ARCH:
+  case process.distros.ARCH:
     languageConfig.compilers.dotnet21.install = `${sudo}pacman -S --noconfirm dotnet-sdk dotnet-runtime
 curl -s https://raw.githubusercontent.com/filipw/dotnet-script/master/install/install.sh | bash`;
     break;
-  case os.distros.AMAZON_AMI:
-  case os.distros.AMAZON:
+  case process.distros.AMAZON_AMI:
+  case process.distros.AMAZON:
     languageConfig.compilers.dotnet21.install = process.replacePMByDistro(
       `${sudo}rpm --force -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
   yum install -y unzip dotnet-sdk-2.1 aspnetcore-runtime-2.1`
@@ -52,8 +52,8 @@ curl -s https://raw.githubusercontent.com/filipw/dotnet-script/master/install/in
 curl -s https://raw.githubusercontent.com/filipw/dotnet-script/master/install/install.sh | bash
 ${sudo}chmod +x ~/.dotnet21/tools/dotnet-script`;
     break;
-  case os.distros.CENTOS:
-    if (os.v() < 8) {
+  case process.distros.CENTOS:
+    if (process.distroVersion * 1 < 8) {
       languageConfig.compilers.dotnet21.install = `${sudo}rpm --force -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
 ${sudo}yum install -y dotnet-sdk-2.1 aspnetcore-runtime-2.1
 `;
@@ -66,7 +66,7 @@ ${sudo}yum install -y dotnet-sdk-2.1 aspnetcore-runtime-2.1`;
 ${sudo}curl -s https://raw.githubusercontent.com/filipw/dotnet-script/master/install/install.sh | bash`;
 
     break;
-  case os.distros.UBUNTU:
+  case process.distros.UBUNTU:
     const version = process.distroVersion; //20.04, 18.04
 
     languageConfig.compilers.dotnet21.install = `${sudo}wget -q https://packages.microsoft.com/config/ubuntu/${version}/packages-microsoft-prod.deb
