@@ -46,7 +46,7 @@ curl -s https://raw.githubusercontent.com/filipw/dotnet-script/master/install/in
   case process.distros.AMAZON:
     languageConfig.compilers.dotnet21.install = process.replacePMByDistro(
       `${sudo}rpm --force -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
-  yum install -y unzip dotnet-sdk-2.1 aspnetcore-runtime-2.1`
+${sudo}yum install -y unzip dotnet-sdk-2.1 aspnetcore-runtime-2.1`
     );
     languageConfig.compilers.dotnet21.install += `
 curl -s https://raw.githubusercontent.com/filipw/dotnet-script/master/install/install.sh | bash
